@@ -8,6 +8,7 @@ import {
 
 export default function Home({ story }) {
   story = useStoryblokState(story);
+  console.log("=======story: ", story);
 
   return (
     <div>
@@ -21,7 +22,7 @@ export default function Home({ story }) {
 }
 
 export async function getStaticProps() {
-  let slug = "home";
+  let slug = "coding-challenge";
 
   let sbParams = {
     version: "published",
@@ -29,6 +30,7 @@ export async function getStaticProps() {
 
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  console.log("======= data: ", data);
 
   return {
     props: {

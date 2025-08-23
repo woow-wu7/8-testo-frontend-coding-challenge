@@ -1,113 +1,124 @@
-# Frontend Coding Challenge
+# Testo Frontend Coding Challenge
 
-## Setup
+这是一个基于 Next.js 和 StoryBlok 的前端项目，用于展示和渲染 StoryBlok CMS 中的内容。
 
-Please fork this GitHub project for you and send us the link of your version as soon as you're done.
-
-## Task
-
-You are provided with a Figma mockup for creating an *image-text-section* component that should be
-implemented in Next.js (React) with the content out of the Storyblok API. You can do the implementation either in
-JavaScript or TypeScript, depending on your preference. For styling, however, Tailwind CSS should be used.
-
-Make sure to display all the data you see in the mockup which can be retrieved from the API you see in the
-section below. If you can't access the JSON data through the API call, you can find the output in the JSON file
-*output.json* in this project.
-
-*Side note: The already existing components Feature, Grid, Page and Teaser in the src/components folder are
-automatically generated during the creation of a Next/Storyblok project and are only there for demonstration purposes,
-so they don't have to be used and can therefore be seen as irrelevant for processing this challenge. A short tutorial on
-how to add a headless CMS to Next.js can be
-found [here](https://www.storyblok.com/tp/add-a-headless-cms-to-next-js-in-5-minutes).*
-
-### Further information about the *image-text-section* in Storyblok
-
-If you don't have a Storyblok account, this is how the *image-text-section* block is built and configured:
-
-#### Fields
-
-##### *Text*
-
-* headline (field type: Text)
-* text (field type: Richtext)
-* button (field type: Blocks)
-
-##### *Image*
-
-* image (field type: Asset)
-* image_layout (field type: Single-Option)
-
-##### *Style (not required for implementation)*
-
-* reverse_layout (field type: Boolean)
-* background_color (field type: Single-Option)
-
-#### Config
-
-* Technical name: image-text-section
-* Display name: Image Text Section
-* Block type: Nestable block
-
-## Design
-
-The design is provided via
-Figma: https://www.figma.com/file/i6yH5MiA0swrvORR0Vzo4G/Coding-Challenge?node-id=1%3A55&t=IOFQD6TVvTFpw4Au-1
-
-## Links & API
-
-* Slug of the demo page: coding-challenge
-
-* Public token of the Storyblok space: 7AYvqGn4sJQV8tWRrG4g7Att
-
-* REST API (JSON): https://api.storyblok.com/v2/cdn/stories/coding-challenge?cv=1682689636&token=7FmwGeMV2rQLGkGafUByDAtt&version=published
-
-* Documentation for the Storyblok API
-  connection: https://www.storyblok.com/docs/api/content-delivery/v2#topics/introduction
-
-## Development
-
-First, run `npm install` to install all the node modules necessary for this project.
-
-To run the development server, use one of the following:
+## 项目结构
 
 ```
-npm run dev
-# or
-pnpm dev
+src/
+├── components/           # React 组件
+│   ├── DefaultPage.js   # 默认页面组件，显示页面元数据和内容
+│   ├── Button.js        # 按钮组件，支持多种样式和尺寸
+│   ├── Text.js          # 富文本组件，支持多种文本格式
+│   ├── image-text-section.js  # 图文组合组件
+│   └── ...              # 其他组件
+├── pages/               # Next.js 页面
+│   ├── _app.js         # 应用入口，注册 StoryBlok 组件
+│   ├── index.js        # 首页，获取 coding-challenge 内容
+│   └── [...slug].tsx   # 动态路由页面
+└── styles/              # 样式文件
+    └── globals.css      # 全局样式
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 主要功能
 
-### Setting up a dev server with HTTPS proxy (required by Storyblok preview)
+### 1. DefaultPage 组件
 
-Install *mkcert* to create a valid certificate: https://github.com/FiloSottile/mkcert
+- 显示页面标题和元数据（创建时间、发布时间、更新时间、ID、Slug）
+- 使用 `StoryblokComponent` 渲染 `body` 中的嵌套组件
+- 支持响应式布局和美观的样式
 
-Running the proxy to target port 3000, you can change that to any port of your choice, but it should be what your app is
-running on in development.
+### 2. Button 组件
 
+- 支持多种按钮颜色：primary、secondary、success、danger
+- 支持多种按钮尺寸：small、medium、large
+- 支持多种按钮样式：default、outline、ghost
+- 自动处理链接和样式类
+
+### 3. Text 组件
+
+- 支持富文本内容渲染
+- 处理段落、标题、列表等块级元素
+- 支持文本样式：粗体、斜体、下划线、颜色
+- 支持换行符和特殊格式
+
+### 4. ImageTextSection 组件
+
+- 支持图文组合布局
+- 可配置图片位置（左侧或右侧）
+- 支持背景颜色配置
+- 集成 Button 和 Text 组件
+
+## StoryBlok 数据结构支持
+
+项目支持以下 StoryBlok 数据结构：
+
+```json
+{
+  "name": "页面标题",
+  "created_at": "创建时间",
+  "published_at": "发布时间",
+  "updated_at": "更新时间",
+  "id": "页面ID",
+  "slug": "页面标识",
+  "content": {
+    "body": [
+      {
+        "component": "image-text-section",
+        "headline": "标题（富文本）",
+        "text": "正文内容（富文本）",
+        "image": "图片信息",
+        "button": "按钮数组",
+        "image_layout": "图片布局",
+        "reverse_layout": "是否反转布局",
+        "background_color": "背景颜色"
+      }
+    ]
+  }
+}
 ```
-npm install -g local-ssl-proxy
+
+## 使用方法
+
+1. 确保已安装依赖：
+
+   ```bash
+   npm install
+   ```
+
+2. 启动开发服务器：
+
+   ```bash
+   npm run dev
+   ```
+
+3. 访问 `http://localhost:3000` 查看 coding-challenge 页面
+
+## 技术栈
+
+- **Next.js** - React 框架
+- **StoryBlok** - Headless CMS
+- **Tailwind CSS** - 样式框架
+- **TypeScript** - 类型支持（部分文件）
+
+## 组件注册
+
+所有组件都在 `src/pages/_app.js` 中注册，确保 StoryBlok 能够正确识别和渲染：
+
+```javascript
+const components = {
+  "default-page": DefaultPage,
+  "image-text-section": ImageTextSection,
+  button: Button,
+  text: Text,
+  // ... 其他组件
+};
 ```
 
-```
-local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem
-```
+## 样式特点
 
-The local page you see your implementation in can then be accessed here: https://localhost:3010/coding-challenge
-
-## Storyblok Demo
-
-This is the element (*image-text-section* component) from the Storyblok demo frontend based on Next.js
-
-![Storyblok Demo](storyblok_demo.png)
-
-The full demo page can be found here: https://storyblok-demo-default.vercel.app/
-
-## Disclaimer
-
-Limit your invested time to a maximum of 1 hour. You don't need to be finished when you reach this time limit since it's
-rather short.
-
-Please also provide us with a description of how you tackled this task and what challenges you faced.
-
-We want to evaluate how you work and what your process is, so don't worry if you cannot provide a perfect solution.
+- 使用 Tailwind CSS 实现响应式设计
+- 支持深色/浅色主题
+- 现代化的 UI 设计
+- 良好的可访问性支持
+- 移动端友好的布局
