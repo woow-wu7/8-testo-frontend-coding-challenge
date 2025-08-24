@@ -18,21 +18,23 @@ const ImageTextSection = ({ blok }) => {
         {/* ------- ------- ------- ------- ------- ------- ------- dividing line. ------- ------- */}
         {/* 1 */}
         {/* PC */}
-        <div className="hidden lg:grid lg:grid-cols-2 lg:gap-16 xl:gap-20 items-center">
+        <div className="hidden lg:grid lg:grid-cols-5 lg:gap-16 xl:gap-10 items-center">
           {/* PC Left */}
           <div
-            className={`${blok.reverse_layout ? "lg:order-2" : "lg:order-1"}`}
+            className={`${
+              blok.reverse_layout ? "lg:order-2" : "lg:order-1"
+            } lg:col-span-3`}
           >
             {/* Headline */}
             {blok.headline && (
-              <div className="mb-8">
+              <div className="mb-6">
                 <TestoText blok={blok.headline} />
               </div>
             )}
 
             {/* Paragraph */}
             {blok.text && (
-              <div className="mb-10 space-y-6">
+              <div className="mb-6 space-y-6">
                 <TestoText blok={blok.text} />
               </div>
             )}
@@ -51,7 +53,7 @@ const ImageTextSection = ({ blok }) => {
           <div
             className={`h-full ${
               blok.reverse_layout ? "lg:order-1" : "lg:order-2"
-            }`}
+            } lg:col-span-2`}
           >
             {/* image */}
             {blok.image && (
@@ -59,11 +61,12 @@ const ImageTextSection = ({ blok }) => {
                 <img
                   src={blok.image.filename}
                   alt={blok.image.alt || blok.image.title}
-                  className={`h-full rounded-xl shadow-2xl ${
-                    blok.image_layout === "proportional"
-                      ? "object-contain"
-                      : "object-cover"
-                  }`}
+                  className={`h-full rounded-t-xl shadow-2xl aspect-video`}
+                  // className={`h-full rounded-xl shadow-2xl ${
+                  //   blok.image_layout === "proportional"
+                  //     ? "object-contain"
+                  //     : "object-cover"
+                  // }`}
                 />
                 {blok.image.copyright && (
                   <p className="text-xs text-gray-500 mt-3 text-center">
@@ -116,7 +119,7 @@ const ImageTextSection = ({ blok }) => {
                 <img
                   src={blok.image.filename}
                   alt={blok.image.alt || blok.image.title}
-                  className={`w-full h-auto rounded-lg shadow-xl ${
+                  className={`w-full h-auto rounded-lg shadow-x ${
                     blok.image_layout === "proportional"
                       ? "object-contain"
                       : "object-cover"

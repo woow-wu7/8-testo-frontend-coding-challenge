@@ -2,6 +2,8 @@ import React from "react";
 import { storyblokEditable } from "@storyblok/react";
 
 const Button = ({ blok }) => {
+  // blok.button_color = "danger";
+
   const getButtonClasses = () => {
     let baseClasses =
       "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105 active:scale-95";
@@ -38,7 +40,7 @@ const Button = ({ blok }) => {
         baseClasses += " text-sm px-4 py-2";
         break;
       default: // medium
-        baseClasses += " text-base px-6 py-3";
+        baseClasses += " text-sm px-4 py-1";
     }
 
     return baseClasses;

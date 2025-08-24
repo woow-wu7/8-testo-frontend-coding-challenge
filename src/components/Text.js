@@ -12,7 +12,7 @@ const Text = ({ blok }) => {
         return (
           <p
             key={index}
-            className="mb-4 text-gray-500 leading-relaxed text-sm sm:text-sm"
+            className="mb-2 text-gray-500 leading-relaxed text-sm sm:text-sm"
           >
             {block.content?.map((contentItem, contentIndex) => {
               if (contentItem.type === "text") {
@@ -58,16 +58,19 @@ const Text = ({ blok }) => {
         // const HeadingTag = `h${level}`;
 
         const headingClasses = {
-          1: "text-4xl sm:text-5xl text-gray-900 mb-6 leading-tight",
-          2: "text-3xl sm:text-4xl text-gray-900 mb-6 leading-tight",
-          3: "text-2xl sm:text-3xl text-gray-900 mb-4 leading-tight",
-          4: "text-xl sm:text-2xl text-gray-900 mb-4 leading-tight",
-          5: "text-lg sm:text-xl text-gray-900 mb-3 leading-tight",
-          6: "text-base sm:text-lg text-gray-900 mb-3 leading-tight",
+          6: "text-4xl sm:text-5xl text-gray-900 mb-6 leading-tight",
+          5: "text-3xl sm:text-4xl text-gray-900 mb-6 leading-tight",
+          4: "text-2xl sm:text-3xl text-gray-900 mb-4 leading-tight",
+          3: "text-xl sm:text-2xl text-gray-900 mb-4 leading-tight",
+          2: "text-lg sm:text-xl text-gray-900 mb-3 leading-tight",
+          1: "text-base sm:text-lg text-gray-900 mb-3 leading-tight",
         };
 
         return (
-          <div key={index} className={headingClasses[4] || headingClasses[2]}>
+          <div
+            key={index}
+            className={headingClasses[level] || headingClasses[2]}
+          >
             {block.content?.map((contentItem, contentIndex) => {
               if (contentItem.type === "text") {
                 const text = contentItem.text;
