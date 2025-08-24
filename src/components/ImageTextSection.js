@@ -10,7 +10,6 @@ const ImageTextSection = ({ blok }) => {
       className="py-16 lg:py-20 bg-white"
       {...storyblokEditable(blok)}
       style={{
-        border: "1px solid red",
         backgroundColor: blok.background_color,
       }}
     >
