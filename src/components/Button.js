@@ -4,32 +4,32 @@ import { storyblokEditable } from "@storyblok/react";
 const Button = ({ blok }) => {
   const getButtonClasses = () => {
     let baseClasses =
-      "inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+      "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105 active:scale-95";
 
-    // 按钮颜色样式
+    // color
     switch (blok.button_color) {
       case "primary":
         baseClasses +=
-          " bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500";
+          " bg-amber-500 text-gray-800 hover:bg-orange-600 focus:ring-orange-500 shadow-lg hover:shadow-xl";
         break;
       case "secondary":
         baseClasses +=
-          " bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500";
+          " bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500 shadow-lg hover:shadow-xl";
         break;
       case "success":
         baseClasses +=
-          " bg-green-600 text-white hover:bg-green-700 focus:ring-green-500";
+          " bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 shadow-lg hover:shadow-xl";
         break;
       case "danger":
         baseClasses +=
-          " bg-red-600 text-white hover:bg-red-700 focus:ring-red-500";
+          " bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-lg hover:shadow-xl";
         break;
       default:
         baseClasses +=
-          " bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500";
+          " bg-orange-500 text-white hover:bg-orange-600 focus:ring-orange-500 shadow-lg hover:shadow-xl";
     }
 
-    // 按钮尺寸
+    // size
     switch (blok.size) {
       case "large":
         baseClasses += " text-lg px-8 py-4";
@@ -47,12 +47,37 @@ const Button = ({ blok }) => {
   const getButtonStyle = () => {
     switch (blok.style) {
       case "outline":
-        return "border-2 border-current bg-transparent hover:bg-current hover:text-white";
+        return "border-2 border-orange-500 bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white";
       case "ghost":
-        return "bg-transparent hover:bg-gray-100";
+        return "bg-transparent text-orange-500 hover:bg-orange-50";
+      case "default":
+        return "rounded-full";
       default:
         return "";
     }
+  };
+
+  const getButtonOutlineStyle = () => {
+    let outlineStyle = "";
+
+    switch (blok.button_color) {
+      case "primary":
+        outlineStyle = "bg-white border-amber-500 border p-[2px] rounded-full";
+        break;
+      case "secondary":
+        outlineStyle = "bg-white border-gray-500 border p-[2px] rounded-full";
+        break;
+      case "success":
+        outlineStyle = " bg-white border-green-500 border p-[2px] rounded-full";
+        break;
+      case "danger":
+        outlineStyle = " bg-white border-red-500 border p-[2px] rounded-full";
+        break;
+      default:
+        outlineStyle = "bg-white border-amber-500 border p-[2px] rounded-full";
+    }
+
+    return outlineStyle;
   };
 
   const buttonClasses = getButtonClasses();
@@ -60,13 +85,15 @@ const Button = ({ blok }) => {
   const finalClasses = `${buttonClasses} ${buttonStyle}`.trim();
 
   return (
-    <a
-      href={blok.link?.cached_url || blok.link?.url || "#"}
-      className={finalClasses}
-      {...storyblokEditable(blok)}
-    >
-      {blok.label}
-    </a>
+    <div className={getButtonOutlineStyle()}>
+      <a
+        href={blok.link?.cached_url || blok.link?.url || "#"}
+        className={finalClasses}
+        {...storyblokEditable(blok)}
+      >
+        {blok.label}
+      </a>
+    </div>
   );
 };
 

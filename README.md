@@ -10,7 +10,8 @@ src/
 │   ├── DefaultPage.js   # 默认页面组件，显示页面元数据和内容
 │   ├── Button.js        # 按钮组件，支持多种样式和尺寸
 │   ├── Text.js          # 富文本组件，支持多种文本格式
-│   ├── image-text-section.js  # 图文组合组件
+│   ├── image-text-section.js  # 图文组合组件（响应式设计）
+│   ├── ImageTextSectionMobile.js  # 移动端专用组件
 │   └── ...              # 其他组件
 ├── pages/               # Next.js 页面
 │   ├── _app.js         # 应用入口，注册 StoryBlok 组件
@@ -33,7 +34,9 @@ src/
 - 支持多种按钮颜色：primary、secondary、success、danger
 - 支持多种按钮尺寸：small、medium、large
 - 支持多种按钮样式：default、outline、ghost
+- 默认使用橙色主题，符合设计图要求
 - 自动处理链接和样式类
+- 添加了悬停效果和阴影
 
 ### 3. Text 组件
 
@@ -41,13 +44,61 @@ src/
 - 处理段落、标题、列表等块级元素
 - 支持文本样式：粗体、斜体、下划线、颜色
 - 支持换行符和特殊格式
+- 响应式字体大小和行高
 
 ### 4. ImageTextSection 组件
 
+- **三套响应式布局**：
+  - **PC 端（lg+）**：两列布局，大间距，大图片
+  - **平板端（md-lg）**：两列布局，中等间距，中等图片
+  - **移动端（<md）**：单列堆叠布局，紧凑间距
 - 支持图文组合布局
 - 可配置图片位置（左侧或右侧）
 - 支持背景颜色配置
 - 集成 Button 和 Text 组件
+- 完全响应式设计
+
+### 5. ImageTextSectionMobile 组件
+
+- 专门为移动端设计的单列布局
+- 优化的移动端间距和字体大小
+- 按钮居中显示
+- 图片全宽显示
+
+## 响应式布局设计
+
+### 断点设计
+
+- **移动端**：`< 768px` - 单列堆叠布局
+- **平板端**：`768px - 1024px` - 两列布局，中等间距
+- **PC 端**：`> 1024px` - 两列布局，大间距
+
+### 布局特点
+
+#### PC 端布局
+
+- 两列网格布局（`lg:grid-cols-2`）
+- 大间距（`lg:gap-16 xl:gap-20`）
+- 大内边距（`lg:py-20`）
+- 大图片阴影（`shadow-2xl`）
+- 圆角图片（`rounded-xl`）
+
+#### 平板端布局
+
+- 两列网格布局（`md:grid-cols-2`）
+- 中等间距（`md:gap-12`）
+- 中等内边距（`py-16`）
+- 中等图片阴影（`shadow-xl`）
+- 圆角图片（`rounded-lg`）
+
+#### 移动端布局
+
+- 单列堆叠布局（`space-y-6`）
+- 紧凑间距
+- 较小内边距（`py-8 sm:py-12`）
+- 标准图片阴影（`shadow-lg`）
+- 按钮居中显示
+- 图片全宽显示
 
 ## StoryBlok 数据结构支持
 
@@ -109,6 +160,9 @@ src/
 const components = {
   "default-page": DefaultPage,
   "image-text-section": ImageTextSection,
+  "image-text-section-mobile": ImageTextSectionMobile,
+  "2-column-section": TwoColumnSection,
+  "2-column-section-mobile": TwoColumnSectionMobile,
   button: Button,
   text: Text,
   // ... 其他组件
@@ -117,8 +171,22 @@ const components = {
 
 ## 样式特点
 
-- 使用 Tailwind CSS 实现响应式设计
+- 使用 Tailwind CSS 实现完全响应式设计
 - 支持深色/浅色主题
 - 现代化的 UI 设计
 - 良好的可访问性支持
 - 移动端友好的布局
+- 悬停效果和过渡动画
+- 阴影和圆角设计
+- 橙色主题按钮，符合设计图要求
+
+## 设计图实现
+
+根据提供的设计图，实现了：
+
+1. **PC 端两列布局**：文本在左侧，图片在右侧
+2. **移动端单列布局**：标题、文本、按钮、图片从上到下排列
+3. **橙色按钮**：符合设计图的按钮样式
+4. **响应式间距**：不同屏幕尺寸的优化间距
+5. **图片阴影**：增强视觉层次感
+6. **字体层次**：清晰的标题和正文层次

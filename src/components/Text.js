@@ -6,15 +6,20 @@ const Text = ({ blok }) => {
 
   const renderContent = (content) => {
     return content.map((block, index) => {
+      // 1
+      // type: paragraph
       if (block.type === "paragraph") {
         return (
-          <p key={index} className="mb-4 text-gray-700 leading-relaxed">
+          <p
+            key={index}
+            className="mb-4 text-gray-500 leading-relaxed text-sm sm:text-sm"
+          >
             {block.content?.map((contentItem, contentIndex) => {
               if (contentItem.type === "text") {
                 const text = contentItem.text;
                 const marks = contentItem.marks || [];
 
-                // 处理文本样式
+                // process className
                 let className = "";
                 if (marks.some((mark) => mark.type === "bold")) {
                   className += "font-bold ";
@@ -45,24 +50,24 @@ const Text = ({ blok }) => {
             })}
           </p>
         );
-      } else if (block.type === "heading") {
+      }
+      // 2
+      // type heading
+      else if (block.type === "heading") {
         const level = block.attrs?.level || 2;
-        const HeadingTag = `h${level}`;
+        // const HeadingTag = `h${level}`;
 
         const headingClasses = {
-          1: "text-4xl font-bold text-gray-900 mb-6",
-          2: "text-3xl font-bold text-gray-900 mb-6",
-          3: "text-2xl font-bold text-gray-900 mb-4",
-          4: "text-xl font-bold text-gray-900 mb-4",
-          5: "text-lg font-bold text-gray-900 mb-3",
-          6: "text-base font-bold text-gray-900 mb-3",
+          1: "text-4xl sm:text-5xl text-gray-900 mb-6 leading-tight",
+          2: "text-3xl sm:text-4xl text-gray-900 mb-6 leading-tight",
+          3: "text-2xl sm:text-3xl text-gray-900 mb-4 leading-tight",
+          4: "text-xl sm:text-2xl text-gray-900 mb-4 leading-tight",
+          5: "text-lg sm:text-xl text-gray-900 mb-3 leading-tight",
+          6: "text-base sm:text-lg text-gray-900 mb-3 leading-tight",
         };
 
         return (
-          <HeadingTag
-            key={index}
-            className={headingClasses[level] || headingClasses[2]}
-          >
+          <div key={index} className={headingClasses[4] || headingClasses[2]}>
             {block.content?.map((contentItem, contentIndex) => {
               if (contentItem.type === "text") {
                 const text = contentItem.text;
@@ -73,13 +78,22 @@ const Text = ({ blok }) => {
                 }
                 return text;
               }
+              if (contentItem.type === "hard_break") {
+                return <div key={contentIndex}></div>;
+              }
               return null;
             })}
-          </HeadingTag>
+          </div>
         );
-      } else if (block.type === "bullet_list") {
+      }
+      // 3
+      // type bullet_list
+      else if (block.type === "bullet_list") {
         return (
-          <ul key={index} className="list-disc list-inside mb-4 text-gray-700">
+          <ul
+            key={index}
+            className="list-disc list-inside mb-4 text-gray-700 space-y-2"
+          >
             {block.content?.map((listItem, listIndex) => (
               <li key={listIndex} className="mb-2">
                 {listItem.content?.map((contentItem, contentIndex) => {
@@ -92,11 +106,14 @@ const Text = ({ blok }) => {
             ))}
           </ul>
         );
-      } else if (block.type === "ordered_list") {
+      }
+      // 4
+      // type ordered_list
+      else if (block.type === "ordered_list") {
         return (
           <ol
             key={index}
-            className="list-decimal list-inside mb-4 text-gray-700"
+            className="list-decimal list-inside mb-4 text-gray-700 space-y-2"
           >
             {block.content?.map((listItem, listIndex) => (
               <li key={listIndex} className="mb-2">
