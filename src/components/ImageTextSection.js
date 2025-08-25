@@ -18,12 +18,12 @@ const ImageTextSection = ({ blok }) => {
         {/* ------- ------- ------- ------- ------- ------- ------- dividing line. ------- ------- */}
         {/* 1 */}
         {/* PC */}
-        <div className="hidden lg:grid lg:grid-cols-5 lg:gap-16 xl:gap-10 items-center">
+        <div className="hidden lg:grid lg:grid-cols-11 lg:gap-16 xl:gap-10 items-center">
           {/* PC Left */}
           <div
             className={`${
               blok.reverse_layout ? "lg:order-2" : "lg:order-1"
-            } lg:col-span-3`}
+            } lg:col-span-6`}
           >
             {/* Headline */}
             {blok.headline && (
@@ -53,7 +53,7 @@ const ImageTextSection = ({ blok }) => {
           <div
             className={`h-full ${
               blok.reverse_layout ? "lg:order-1" : "lg:order-2"
-            } lg:col-span-2`}
+            } lg:col-span-5 `}
           >
             {/* image */}
             {blok.image && (
@@ -119,7 +119,7 @@ const ImageTextSection = ({ blok }) => {
                 <img
                   src={blok.image.filename}
                   alt={blok.image.alt || blok.image.title}
-                  className={`w-full h-auto rounded-lg shadow-x ${
+                  className={`w-full h-auto rounded-t-xl shadow-x ${
                     blok.image_layout === "proportional"
                       ? "object-contain"
                       : "object-cover"
@@ -168,7 +168,7 @@ const ImageTextSection = ({ blok }) => {
               <img
                 src={blok.image.filename}
                 alt={blok.image.alt || blok.image.title}
-                className={`w-full h-auto rounded-lg shadow-lg ${
+                className={`w-full h-auto rounded-t-xl shadow-lg ${
                   blok.image_layout === "proportional"
                     ? "object-contain"
                     : "object-cover"
