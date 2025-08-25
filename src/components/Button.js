@@ -6,7 +6,7 @@ const Button = ({ blok }) => {
 
   const getButtonClasses = () => {
     let baseClasses =
-      "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105 active:scale-95";
+      "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 transform";
 
     // color
     switch (blok.button_color) {
@@ -60,23 +60,27 @@ const Button = ({ blok }) => {
   };
 
   const getButtonOutlineStyle = () => {
-    let outlineStyle = "";
+    let outlineStyle =
+      "transition-all duration-200 transform hover:scale-105 active:scale-95 cursor-pointer";
 
     switch (blok.button_color) {
       case "primary":
-        outlineStyle = "bg-white border-amber-500 border p-[2px] rounded-full";
+        outlineStyle +=
+          " bg-white border-amber-500 border p-[2px] rounded-full";
         break;
       case "secondary":
-        outlineStyle = "bg-white border-gray-500 border p-[2px] rounded-full";
+        outlineStyle += " bg-white border-gray-500 border p-[2px] rounded-full";
         break;
       case "success":
-        outlineStyle = " bg-white border-green-500 border p-[2px] rounded-full";
+        outlineStyle +=
+          " bg-white border-green-500 border p-[2px] rounded-full";
         break;
       case "danger":
-        outlineStyle = " bg-white border-red-500 border p-[2px] rounded-full";
+        outlineStyle += " bg-white border-red-500 border p-[2px] rounded-full";
         break;
       default:
-        outlineStyle = "bg-white border-amber-500 border p-[2px] rounded-full";
+        outlineStyle +=
+          " bg-white border-amber-500 border p-[2px] rounded-full";
     }
 
     return outlineStyle;
