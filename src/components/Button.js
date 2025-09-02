@@ -2,7 +2,7 @@ import React from "react";
 import { storyblokEditable } from "@storyblok/react";
 
 const Button = ({ blok }) => {
-  // blok.button_color = "danger";
+  blok.button_color = "success";
 
   const getButtonClasses = () => {
     let baseClasses =

@@ -90,6 +90,11 @@ const Text = ({ blok }) => {
         );
       }
       // 3
+      // type button
+      else if (block.type === 'button') {
+        
+      }
+      // 4
       // type bullet_list
       else if (block.type === "bullet_list") {
         return (
@@ -110,7 +115,7 @@ const Text = ({ blok }) => {
           </ul>
         );
       }
-      // 4
+      // 5
       // type ordered_list
       else if (block.type === "ordered_list") {
         return (

@@ -7,7 +7,7 @@ const DefaultPage = ({ blok }) => {
 
   return (
     <main
-      className=" max-w-[1200px] mx-auto px-4 py-8"
+      className="max-w-[1200px] mx-auto px-4 py-8"
       {...storyblokEditable(blok)}
     >
       {blok && blok.body && (
